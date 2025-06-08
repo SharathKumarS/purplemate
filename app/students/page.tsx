@@ -198,13 +198,13 @@ export default function StudentsPage() {
       <div className="min-h-screen bg-white">
         <Header />
 
-        <main className="container mx-auto px-4 py-8">
-                  <Breadcrumbs
-                    items={[
-                      { label: "Home", href: "/" },
-                      { label: "For Remote Workers", href: "/remote-workers" },
-                    ]}
-                  />
+      <main className="container mx-auto px-4 py-8">
+        <Breadcrumbs
+          items={[
+          { label: "Home", href: "/" },
+          { label: "For Remote Workers", href: "/remote-workers" },
+          ]}
+        />
         
 
         {/* Hero Section */}
@@ -493,6 +493,7 @@ export default function StudentsPage() {
             </div>
           </div>
         </section>
+      </main>
 
         <Footer />
       </div>
