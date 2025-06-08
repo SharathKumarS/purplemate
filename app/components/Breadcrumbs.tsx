@@ -1,88 +1,71 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 import { ChevronRight, Home } from "lucide-react"
+import { usePathname } from "next/navigation"
 
 interface BreadcrumbItem {
   label: string
   href: string
-  active?: boolean
 }
 
 interface BreadcrumbsProps {
   items?: BreadcrumbItem[]
-  homeHref?: string
-  homeLabel?: string
-  className?: string
 }
 
-export default function Breadcrumbs({
-  items = [],
-  homeHref = "/",
-  homeLabel = "Home",
-  className = "",
-}: BreadcrumbsProps) {
+export function Breadcrumbs({ items }: BreadcrumbsProps) {
   const pathname = usePathname()
 
-  // If no items are provided, generate them from the pathname
-  const breadcrumbs = items.length > 0 ? items : generateBreadcrumbs(pathname, homeHref, homeLabel)
+  // If no custom items provided, generate from pathname
+  const breadcrumbItems = items || generateBreadcrumbs(pathname)
 
   return (
-    <nav aria-label="Breadcrumb" className={`flex items-center text-sm ${className}`}>
-      <ol className="flex items-center flex-wrap">
-        {breadcrumbs.map((breadcrumb, index) => (
-          <li key={breadcrumb.href} className="flex items-center">
-            {index > 0 && <ChevronRight className="w-4 h-4 mx-2 text-gray-400" />}
-            {breadcrumb.active ? (
-              <span className="font-medium text-gray-900" aria-current="page">
-                {breadcrumb.label}
-              </span>
-            ) : (
-              <Link
-                href={breadcrumb.href}
-                className="text-gray-500 hover:text-purple-600 transition-colors flex items-center"
-              >
-                {index === 0 && <Home className="w-4 h-4 mr-1" />}
-                {breadcrumb.label}
-              </Link>
-            )}
-          </li>
-        ))}
-      </ol>
+    <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-6">
+      <Link href="/" className="flex items-center hover:text-purple-600 transition-colors">
+        <Home className="w-4 h-4" />
+      </Link>
+
+      {breadcrumbItems.map((item, index) => (
+        <div key={item.href} className="flex items-center space-x-2">
+          <ChevronRight className="w-4 h-4 text-gray-400" />
+          {index === breadcrumbItems.length - 1 ? (
+            <span className="text-gray-900 font-medium">{item.label}</span>
+          ) : (
+            <Link href={item.href} className="hover:text-purple-600 transition-colors">
+              {item.label}
+            </Link>
+          )}
+        </div>
+      ))}
     </nav>
   )
 }
 
-// Helper function to generate breadcrumbs from pathname
-function generateBreadcrumbs(pathname: string, homeHref: string, homeLabel: string): BreadcrumbItem[] {
-  const paths = pathname.split("/").filter(Boolean)
+function generateBreadcrumbs(pathname: string): BreadcrumbItem[] {
+  const segments = pathname.split("/").filter(Boolean)
+  const breadcrumbs: BreadcrumbItem[] = []
 
-  // Start with home
-  const breadcrumbs: BreadcrumbItem[] = [{ label: homeLabel, href: homeHref, active: paths.length === 0 }]
-
-  // Build up the breadcrumbs based on the path
   let currentPath = ""
 
-  paths.forEach((path, index) => {
-    currentPath += `/${path}`
-    const isLast = index === paths.length - 1
+  segments.forEach((segment, index) => {
+    currentPath += `/${segment}`
 
-    // Format the label (capitalize, replace hyphens with spaces)
-    let label = path.replace(/-/g, " ")
-    label = label.charAt(0).toUpperCase() + label.slice(1)
+    // Format segment name
+    let label = segment
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ")
 
-    // Special cases for specific paths
-    if (path === "discover") label = "Discover Sessions"
-    if (path === "host") label = "Host a Session"
-    if (path === "session") label = "Session Details"
-    if (path === "students") label = "For Students"
-    if (path === "remote-workers") label = "For Remote Workers"
+    // Custom labels for specific routes
+    if (segment === "discover") label = "Discover Sessions"
+    if (segment === "students") label = "Study Sessions"
+    if (segment === "remote-workers") label = "Co-working Sessions"
+    if (segment === "host") label = "Host a Session"
+    if (segment === "auth") label = "Authentication"
 
     breadcrumbs.push({
       label,
       href: currentPath,
-      active: isLast,
     })
   })
 

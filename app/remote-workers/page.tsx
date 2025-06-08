@@ -2,8 +2,9 @@ import type { Metadata } from "next"
 import { RemoteWorkers } from "@/components/pages/remote-workers"
 
 export const metadata: Metadata = {
-  title: "Remote Workers - Hire Talent",
-  description: "Find and hire top remote workers for your business.",
+  title: "Remote Workers - Find Your Dream Remote Job | PurpleMate",
+  description:
+    "Discover amazing remote job opportunities from top companies worldwide. Work from anywhere and build your career on your terms.",
 }
 
 const RemoteWorkersPage = () => {
