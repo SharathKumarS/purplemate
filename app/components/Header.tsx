@@ -28,13 +28,7 @@ export default function Header() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-pink-500 rounded-lg flex items-center justify-center">
-                <Brain className="w-5 h-5 text-white" />
-              </div>
-                <img
-                  src="https://res.cloudinary.com/haceitmedia/image/upload/v1748778710/apibrix_white_logo_inagfh.png"
-                  alt="APIbrix Logo"
-                />
+              <img src="https://res.cloudinary.com/haceitmedia/image/upload/v1749391246/coffeemate_logo_luoonh.png" alt="PurpleMate Logo" className="w-8 h-8" />
             </Link>
 
             {/* Desktop Navigation */}

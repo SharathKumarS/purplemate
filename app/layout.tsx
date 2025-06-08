@@ -22,6 +22,9 @@ export const metadata: Metadata = {
     "PurpleMate helps students and remote workers find nearby people to study or co-work with. Focus together, stay accountable, and get more done.",
   keywords: "study buddy, co-working, productivity, remote work, students, focus sessions",
   authors: [{ name: "PurpleMate Team" }],
+  icons: {
+    icon: "https://res.cloudinary.com/haceitmedia/image/upload/v1749392105/coffeemate-favicon_cxazus.ico",
+  },
   openGraph: {
     title: "PurpleMate - Find Your Perfect Study or Work Buddy",
     description: "Connect with like-minded people for productive study and work sessions",
