@@ -202,7 +202,7 @@ export default function StudentsPage() {
         <Breadcrumbs
           items={[
           { label: "Home", href: "/" },
-          { label: "For Remote Workers", href: "/remote-workers" },
+          { label: "For Students", href: "/students" },
           ]}
         />
         
