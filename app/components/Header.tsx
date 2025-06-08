@@ -28,7 +28,7 @@ export default function Header() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2">
-              <img src="https://res.cloudinary.com/haceitmedia/image/upload/v1749391246/coffeemate_logo_luoonh.png" alt="PurpleMate Logo" className="w-8 h-8" />
+              <img src="https://res.cloudinary.com/haceitmedia/image/upload/v1749391246/coffeemate_logo_luoonh.png" alt="Coffeemate Logo" className="h-8" />
             </Link>
 
             {/* Desktop Navigation */}
