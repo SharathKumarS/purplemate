@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import {
   Calendar,
   Clock,
@@ -134,7 +135,7 @@ export default function SessionDetailPage() {
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Discover Sessions", href: "/discover" },
-    { label: session.title, href: `/session/${sessionId}`, active: true }
+    { label: session.title, href: `/session/${sessionId}`, active: true },
   ]
 
   return (
@@ -309,4 +310,68 @@ export default function SessionDetailPage() {
               <h3 className="text-lg font-bold text-gray-900 mb-4 font-poppins">Who's Joining</h3>
               <div className="space-y-3">
                 {session.attendees.map((attendee, index) => (
-                  <div key={index} className="\
+                  <div key={index} className="flex items-center space-x-3">
+                    <img
+                      src={attendee.avatar || "/placeholder.svg"}
+                      alt={attendee.name}
+                      className="w-8 h-8 rounded-full"
+                    />
+                    <span className="text-sm text-gray-700">{attendee.name}</span>
+                  </div>
+                ))}
+                <div className="text-center pt-2">
+                  <span className="text-sm text-gray-500">
+                    +{session.maxParticipants - session.participants} spots available
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Join Modal */}
+      <Dialog open={showJoinModal} onOpenChange={setShowJoinModal}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Join Session</DialogTitle>
+          </DialogHeader>
+
+          <div className="space-y-6">
+            {joinStep === 1 && (
+              <div className="text-center">
+                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Users className="w-8 h-8 text-purple-600" />
+                </div>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">Ready to join?</h3>
+                <p className="text-gray-600 mb-6">You'll receive session details and connection info via email.</p>
+                <Button onClick={nextStep} className="w-full">
+                  Confirm Join
+                </Button>
+              </div>
+            )}
+
+            {joinStep === 2 && (
+              <div className="text-center">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">You're in!</h3>
+                <p className="text-gray-600 mb-6">Session details have been sent to your email. See you there!</p>
+                <Button onClick={nextStep} className="w-full">
+                  View My Sessions
+                </Button>
+              </div>
+            )}
+          </div>
+          <Button
+            onClick={() => setShowJoinModal(false)}
+            className="flex-1 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600"
+          >
+            Close
+          </Button>
+        </DialogContent>
+      </Dialog>
+    </div>
+  )
+}
