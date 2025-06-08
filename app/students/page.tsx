@@ -19,6 +19,7 @@ import {
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import AuthModal from "../components/AuthModal"
+import Breadcrumbs from "../components/Breadcrumbs"
 
 export default function StudentsPage() {
   const [authModal, setAuthModal] = useState<{ isOpen: boolean; mode: "login" | "signup" }>({
@@ -196,6 +197,15 @@ export default function StudentsPage() {
     <>
       <div className="min-h-screen bg-white">
         <Header />
+
+        <main className="container mx-auto px-4 py-8">
+                  <Breadcrumbs
+                    items={[
+                      { label: "Home", href: "/" },
+                      { label: "For Remote Workers", href: "/remote-workers" },
+                    ]}
+                  />
+        
 
         {/* Hero Section */}
         <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 py-20 lg:py-32">
