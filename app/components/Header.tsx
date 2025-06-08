@@ -31,7 +31,10 @@ export default function Header() {
               <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-pink-500 rounded-lg flex items-center justify-center">
                 <Brain className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold text-gray-900 font-poppins">PurpleMate</span>
+                <img
+                  src="https://res.cloudinary.com/haceitmedia/image/upload/v1748778710/apibrix_white_logo_inagfh.png"
+                  alt="APIbrix Logo"
+                />
             </Link>
 
             {/* Desktop Navigation */}
